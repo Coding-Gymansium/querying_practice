@@ -20,7 +20,8 @@ describe 'ActiveRecord Obstacle Course, Week 1' do
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
     # ------------------------------------------------------------
-
+    orders_of_500 = Order.where("amount = 500")
+    orders_of_200 = Order.where("amount = 200")
     # Expectation
     expect(orders_of_500.count).to eq(1)
     expect(orders_of_200.count).to eq(1)
@@ -40,7 +41,7 @@ describe 'ActiveRecord Obstacle Course, Week 1' do
     expect(order_id).to eq(@order_1.id)
   end
 
-  it '3. finds order id of largest order' do
+  xit '3. finds order id of largest order' do
     # ----------------------- Using Raw SQL ----------------------
     order_id = ActiveRecord::Base.connection.execute('SELECT id FROM orders ORDER BY amount DESC LIMIT 1').first['id']
     # ------------------------------------------------------------
@@ -54,7 +55,7 @@ describe 'ActiveRecord Obstacle Course, Week 1' do
     expect(order_id).to eq(@order_15.id)
   end
 
-  it '4. finds orders of multiple amounts' do
+  xit '4. finds orders of multiple amounts' do
     # ----------------------- Using Ruby -------------------------
     orders_of_500_and_700 = Order.all.select do |order|
       order.amount == 500 || order.amount == 700
@@ -74,7 +75,7 @@ describe 'ActiveRecord Obstacle Course, Week 1' do
     expect(orders_of_700_and_1000.count).to eq(2)
   end
 
-  it '5. finds multiple items by id' do
+  xit '5. finds multiple items by id' do
     ids_to_find = [@item_1.id, @item_2.id, @item_4.id]
     expected_objects = [@item_1, @item_4, @item_2]
 
@@ -90,7 +91,7 @@ describe 'ActiveRecord Obstacle Course, Week 1' do
     expect(items).to eq(expected_objects)
   end
 
-  it '6. finds multiple orders by id' do
+  xit '6. finds multiple orders by id' do
     ids_to_find = [@order_1.id, @order_3.id, @order_5.id, @order_7.id]
 
     # ----------------------- Using Ruby -------------------------
@@ -105,7 +106,7 @@ describe 'ActiveRecord Obstacle Course, Week 1' do
     expect(orders).to eq([@order_3, @order_5, @order_1, @order_7])
   end
 
-  it '7. finds orders with an amount between 700 and 1000' do
+  xit '7. finds orders with an amount between 700 and 1000' do
     expected_result = [@order_11, @order_13, @order_8, @order_10, @order_15, @order_14, @order_12]
     # ----------------------- Using Ruby -------------------------
     orders_between_700_and_1000 = Order.all.select { |order| order.amount >= 700 && order.amount <= 1000 }
@@ -119,7 +120,7 @@ describe 'ActiveRecord Obstacle Course, Week 1' do
     expect(orders_between_700_and_1000).to eq(expected_result)
   end
 
-  it '8. finds orders with an amount less than 550' do
+  xit '8. finds orders with an amount less than 550' do
     expected_result = [@order_3, @order_2, @order_1, @order_4]
 
     # ----------------------- Using Ruby -------------------------
